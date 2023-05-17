@@ -6,6 +6,7 @@ import ListGroup from './common/listGroup';
 import { paginate } from '../utils/paginate';
 import MoviesTable from './moviesTable';
 import _ from "lodash";
+import { Link } from 'react-router-dom';
 
 
 class Movies extends Component {
@@ -71,32 +72,38 @@ class Movies extends Component {
 
         return (
             <React.Fragment>
-            <div className="container">
-                <div className="row">
-                    <div className="col-sm-3 m-2">
-                    <ListGroup
-                    items={this.state.genres}
-                    selectedItem={this.state.selectedGenre}
-                    onItemSelect={this.handleGenreSelect}/>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-sm-3 m-2">
+                            <ListGroup
+                            items={this.state.genres}
+                            selectedItem={this.state.selectedGenre}
+                            onItemSelect={this.handleGenreSelect}/>
+                        </div>
+                        <div className="col-sm-8">
+                            <Link
+                            to="/movies/new"
+                            className="btn btn-primary"
+                            style={{ marginBottom: 20 }}
+                            >New Movie</Link>
+                            <p>Showing {totalCount} movies in the database.</p>
+
+                            <MoviesTable
+                            movies={movies}
+                            sortColumn={sortColumn}
+                            onDelete={this.handleDelete}
+                            onLike={this.handleLike}
+                            onSort={this.handleSort}
+                            />
+                            <Pagination
+                            itemsCount={totalCount}
+                            currentPage={currentPage}
+                            pageSize={pageSize}
+                            onPageChange={this.handlePageChange}
+                            />
+                        </div>
                     </div>
-                <div className="col-sm-8">
-                <p>Showing {totalCount} movies in the database.</p>
-            <MoviesTable
-            movies={movies}
-            sortColumn={sortColumn}
-            onDelete={this.handleDelete}
-            onLike={this.handleLike}
-            onSort={this.handleSort}
-            />
-            <Pagination
-            itemsCount={totalCount}
-            currentPage={currentPage}
-            pageSize={pageSize}
-            onPageChange={this.handlePageChange}
-            />
                 </div>
-                </div>
-            </div>
             </React.Fragment>
         );
     }
