@@ -10,7 +10,8 @@ const Input = ({name, label, value, error, ...rest }) => {
             <input 
                 {...rest}
                 id={name}
-                name={name} 
+                name={name}
+                value={value}
                 className='form-control' />
                {error && <div className="alert alert-danger">{error}</div>}
         </div>
